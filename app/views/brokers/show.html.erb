@@ -1,0 +1,183 @@
+<h2><%= @broker.name %></h2>
+
+<% if @broker.image? %>
+　　<%= image_tag @broker.image.url , {:class => 'broker_img'} %>
+　<% else %>
+　　<%= image_tag 'noimage.png' %>
+　<% end %>
+
+<h2>ブローカー詳細</h2>
+    
+<p class="bro-pro"><%= @broker.b_pro %></p>
+    
+<h2>ブローカー情報</h2>
+    
+<table>
+    <tr>
+        <th>所在地</th>
+        <td><%= @broker.location %></td>
+    </tr>
+    <tr>
+        <th>ライセンス取得地</th>
+        <td><%= @broker.license %></td>
+    </tr>
+    <tr>
+        <th>事業開始日</th>
+        <td><%= @broker.state %></td>
+    </tr>
+    <tr>
+        <th>資本金</th>
+        <td><%= @broker.capital %></td>
+    </tr>
+    <tr>
+        <th>対応言語数</th>
+        <td><%= @broker.lang %></td>
+    </tr>
+    <tr>
+        <th>日本語対応</th>
+        <td><%= @broker.jp_sup %></td>
+    </tr>
+    <tr>
+        <th>口座通貨</th>
+        <td><%= @broker.cur %></td>
+    </tr>
+    <tr>
+        <th>注文方式</th>
+        <td><%= @broker.order %></td>
+    </tr>
+    <tr>
+        <th>最小ロット</th>
+        <td><%= @broker.min_lot %></td>
+    </tr>
+    <tr>
+        <th>最大ロット</th>
+        <td><%= @broker.max_lot %></td>
+    </tr>
+    <tr>
+        <th>提供通貨ペア</th>
+        <td><%= @broker.cur_pair %></td>
+    </tr>
+    <tr>
+        <th>入金方法</th>
+        <td><%= @broker.p_met %></td>
+    </tr>
+    </table>
+    
+    <h2>スペック</h2>
+    <table>
+    <tr>
+        <th>最大レバレッジ</th>
+        <td><%= @broker.max_lev %></td>
+    </tr>
+    <tr>
+        <th>スプレッド</th>
+        <td><%= @broker.spread %></td>
+    </tr>
+    <tr>
+        <th>初回最低入金額</th>
+        <td><%= @broker.min_amo %></td>
+    </tr>
+    <tr>
+        <th>取引手数料</th>
+        <td><%= @broker.tr_fee %></td>
+    </tr>
+    <tr>
+        <th>入金額の口座反映</th>
+        <td><%= @broker.p_ref %></td>
+    </tr>
+    <tr>
+        <th>入金手数料</th>
+        <td><%= @broker.p_fee %></td>
+    </tr>
+    <tr>
+        <th>出金手数料</th>
+        <td><%= @broker.w_fee %></td>
+    </tr>
+    <tr>
+        <th>口座維持手数料</th>
+        <td><%= @broker.m_fee %></td>
+    </tr>
+    <tr>
+        <th>デモ口座</th>
+        <td><%= @broker.demo %></td>
+    </tr>
+    <tr>
+        <th>複数口座の開設</th>
+        <td><%= @broker.multi %></td>
+    </tr>
+    <tr>
+        <th>スプレッド方式</th>
+        <td><%= @broker.sp_met %></td>
+    </tr>
+    <tr>
+        <th>取引システム</th>
+        <td><%= @broker.tr_sys %></td>
+    </tr>
+    <tr>
+        <th>プラットフォーム</th>
+        <td><%= @broker.platform %></td>
+    </tr>
+    <tr>
+        <th>取引可能時間</th>
+        <td><%= @broker.tr_pos %></td>
+    </tr>
+    <tr>
+        <th>GMT時差</th>
+        <td><%= @broker.gmt %></td>
+    </tr>
+    <tr>
+        <th>ロールオーバー</th>
+        <td><%= @broker.rollover %></td>
+    </tr>
+    <tr>
+        <th>マージンコール</th>
+        <td><%= @broker.ma_cal %></td>
+    </tr>
+    <tr>
+        <th>ロスカットルール</th>
+        <td><%= @broker.lo_cut %></td>
+    </tr>
+    <tr>
+        <th>両建て取引</th>
+        <td><%= @broker.both %></td>
+    </tr>
+    <tr>
+        <th>EAの使用制限</th>
+        <td><%= @broker.ea_lim %></td>
+    </tr>
+    <tr>
+        <th>追証発生</th>
+        <td><%= @broker.ma_occ %></td>
+    </tr>
+    <tr>
+        <th>現物譲渡</th>
+        <td><%= @broker.ca_trs %></td>
+    </tr>
+    <tr>
+        <th>預託金の保管方法</th>
+        <td><%= @broker.st_met %></td>
+    </tr>
+    <tr>
+        <th>モバイル対応</th>
+        <td><%= @broker.mo_sup %></td>
+    </tr>
+</table>
+
+<div>
+  <% @evas.each do |eva| %>
+    <div>
+      <h2><%= eva.title %></h2>
+      <p><%= eva.created_at.strftime("%Y/%m/%d %H:%M:%S ") %> 投稿者：<%= eva.user.username %>さん</p>
+      <br>
+      <p><%= eva.body %></p>
+      <% if user_signed_in? && eva.user == current_user %>
+        <p><%= link_to 'この投稿を削除する', eva_path(eva), method: :delete %></p>
+      <% end %>
+    </div>
+    
+  <% end %>
+  <% if user_signed_in? %>
+    <h2>ブローカーを評価する</h2>
+    <%= render 'evas/form' %>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<%= link_to @board.Builder , '#' %>
+<%= @board.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>
+<h2><%= @board.title %></h2>
+<p><%= @board.outset %></p>
+
+<div>
+  <% @comments.each_with_index do |comment, index| %>
+    <div>
+      <label><%= index + 1 %>.　<%= comment.user.username %> さん　[ <%= comment.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>]</label>
+      <p><%= comment.body %></p>
+      <% if user_signed_in? && comment.user == current_user %>
+        <p><%= link_to 'Delete', comment_path(comment), method: :delete %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= render 'comments/form' %>
+  <% end %>
+</div>
+<br><br><br><br>
+<p><%= link_to '掲示板一覧へ', boards_path %></p>

@@ -1,0 +1,18 @@
+<h2>ログイン</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= f.label :ユーザー名 %>
+  <%= f.text_field :username, autofocus: true %>
+
+  <%= f.label :パスワード %>
+  <%= f.password_field :password, autocomplete: "off" %>
+
+  <% if devise_mapping.rememberable? -%>
+    <%= f.check_box :remember_me %><%= f.label :ログイン状態を保持する %>
+  <% end -%>
+
+  <div><%= f.submit "ログイン" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+

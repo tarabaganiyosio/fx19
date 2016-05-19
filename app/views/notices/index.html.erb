@@ -1,0 +1,8 @@
+<h2>村長からのお知らせ</h2>
+<p>コチラでは村長からの大切なお知らせを記しています</p>
+<br><br>
+<% @notices.reverse.each do |notice| %>
+  <%= notice.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+  <%= notice.category %>
+	<%= link_to notice.title, notice_path(notice), { :class => 'post_title' } %>
+<% end %>

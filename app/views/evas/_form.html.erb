@@ -1,0 +1,28 @@
+<%= form_for(@eva) do |f| %>
+  <% if @eva.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@eva.errors.count, "error") %> prohibited this eva from being saved:</h2>
+
+      <ul>
+      <% @eva.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :broker_id %>
+  
+  <div class="field">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :評価内容 %>
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions btn">
+    <%= f.submit :送信 %>
+  </div>
+<% end %>

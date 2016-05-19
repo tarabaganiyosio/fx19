@@ -1,0 +1,15 @@
+<h3 class="board_create_btn">掲示板を新規作成</h3>
+<div class="board_create">
+<%= form_for(@board) do |f| %>
+
+<%= f.hidden_field :Builder, value: current_user.username %>
+
+<%= f.label :タイトル %>
+<%= f.text_field :title %>
+
+<%= f.label :掲示板の説明 %>
+<%= f.text_field :outset %>
+
+<%= f.submit "掲示板を作成", class: "btn btn-large btn-primary" %>
+<% end %>
+</div>

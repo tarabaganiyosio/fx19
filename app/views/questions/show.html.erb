@@ -1,0 +1,25 @@
+<%= link_to @question.username , '#' %>
+<%= @question.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>
+<h2><%= @question.title %></h2>
+<p><%= @question.body %></p>
+
+<div>
+  <% @answers.each_with_index do |answer, index| %>
+    <div>
+      <strong><%= answer.user.username %></strong>
+      <br />
+      <label><%= index + 1 %>.　<%= answer.user.username %> さん　[ <%= answer.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>]</label>
+      <p><%= answer.body %></p>
+      <% if user_signed_in? && answer.user == current_user %>
+        <p><%= link_to 'Delete', answer_path(answer), method: :delete %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= render 'answers/form' %>
+  <% end %>
+</div>
+
+
+<br><br><br><br>
+<p><%= link_to '質問一覧へ', questions_path %></p>

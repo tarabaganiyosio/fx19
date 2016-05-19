@@ -1,0 +1,132 @@
+<h2>ブローカーの追加</h2>
+
+<h3>ブローカー情報</h3>
+        
+<%= form_for(@broker) do |f| %>
+<% if @broker.image? %>
+
+<%= image_tag @broker.image.url %>
+
+<% end %><br>
+<%= f.label :サムネイル %>
+<%= f.file_field :image %>
+<%= f.hidden_field :image_cache %>
+
+<%= f.label :ブローカー名 %>
+<%= f.text_field :name %>
+
+<%= f.label :ブローカー紹介文 %>
+<%= f.text_area :b_pro %>
+
+<%= f.label :所在地 %>
+<%= f.text_field :location %>
+
+<%= f.label :ライセンス取得地 %>
+<%= f.text_field :license %>
+
+<%= f.label :事業開始日 %>
+<%= f.text_field :state %>
+
+<%= f.label :資本金 %>
+<%= f.text_field :capital %>
+
+<%= f.label :対応言語数 %>
+<%= f.text_field :lang %>
+
+<%= f.label :日本語対応 %>
+<%= f.text_field :jp_sup %>
+
+<%= f.label :口座通貨 %>
+<%= f.text_field :cur %>
+
+<%= f.label :注文方式 %>
+<%= f.text_field :order %>
+
+<%= f.label :最小ロット %>
+<%= f.text_field :min_lot %>
+
+<%= f.label :最大ロット %>
+<%= f.text_field :max_lot %>
+
+<%= f.label :提供通貨ペア %>
+<%= f.text_field :cur_pair %>
+
+<%= f.label :入金方法 %>
+<%= f.text_field :p_met %>
+
+<h3>スペック</h3>
+
+<%= f.label :最大レバレッジ %>
+<%= f.text_field :max_lev %>
+
+<%= f.label :スプレッド %>
+<%= f.text_field :spread %>
+
+<%= f.label :初回最低入金額 %>
+<%= f.text_field :min_amo %>
+
+<%= f.label :取引手数料 %>
+<%= f.text_field :tr_fee %>
+
+<%= f.label :入金額の口座反映 %>
+<%= f.text_field :p_ref %>
+
+<%= f.label :入金手数料 %>
+<%= f.text_field :p_fee %>
+
+<%= f.label :出金手数料 %>
+<%= f.text_field :w_fee %>
+
+<%= f.label :口座維持手数料 %>
+<%= f.text_field :m_fee %>
+
+<%= f.label :デモ口座 %>
+<%= f.text_field :demo %>
+
+<%= f.label :複数口座の開設 %>
+<%= f.text_field :multi %>
+
+<%= f.label :スプレッド方式 %>
+<%= f.text_field :sp_met %>
+
+<%= f.label :取引システム %>
+<%= f.text_field :tr_sys %>
+
+<%= f.label :プラットフォーム %>
+<%= f.text_field :platform %>
+
+<%= f.label :取引可能時間 %>
+<%= f.text_field :tr_pos %>
+
+<%= f.label :GMT時差 %>
+<%= f.text_field :gmt %>
+
+<%= f.label :ロールオーバー %>
+<%= f.text_field :rollover %>
+
+<%= f.label :マージンコール %>
+<%= f.text_field :ma_cal %>
+
+<%= f.label :ロスカットルール %>
+<%= f.text_field :lo_cut %>
+
+<%= f.label :両建て取引 %>
+<%= f.text_field :both %>
+
+<%= f.label :eaの使用制限 %>
+<%= f.text_field :ea_lim %>
+
+<%= f.label :追証発生 %>
+<%= f.text_field :ma_occ %>
+
+<%= f.label :現物譲渡 %>
+<%= f.text_field :ca_trs %>
+
+<%= f.label :預託金の保管方法 %>
+<%= f.text_field :st_met %>
+
+<%= f.label :モバイル対応 %>
+<%= f.text_field :mo_sup %>
+
+<%= f.submit "ブローカーを登録", class: "btn btn-large btn-primary" %>
+<% end %>

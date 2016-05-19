@@ -1,0 +1,10 @@
+<h2><%= @user.username %> さんのページ</h2>
+<label>メールアドレス</label>
+<%= @user.email %>
+
+<%= @user.image %>
+
+<%= image_tag @user.image.url %>
+
+
+<li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>

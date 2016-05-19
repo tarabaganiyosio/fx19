@@ -1,0 +1,9 @@
+<h2>FX掲示板 (・A・) ＜FXについて語りましょう</h2>
+
+<%= render 'boards/form' %>
+<br><br><br>
+<ul class="boards">
+    <% @boards.each do |board| %>
+    	<%= link_to board.title, board_path(board), { :class => 'post_title' } %>
+    <% end %>
+</ul>

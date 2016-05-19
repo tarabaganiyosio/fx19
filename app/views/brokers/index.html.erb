@@ -1,0 +1,9 @@
+<h2>ブローカー一覧</h2>
+<ul class="brokers">
+    <% @brokers.each do |broker| %>
+    <li>
+        <h2><%= link_to broker.name, broker %></h2>
+        <p class="bro-pro"><%= broker.b_pro %></p>
+    </li>
+    <% end %>
+</ul>

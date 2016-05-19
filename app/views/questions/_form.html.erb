@@ -1,0 +1,15 @@
+<h3 class="board_create_btn">質問を投稿する</h3>
+<div class="board_create">
+<%= form_for(@question) do |f| %>
+
+<%= f.hidden_field :username, value: current_user.username %>
+
+<%= f.label :タイトル %>
+<%= f.text_field :title %>
+
+<%= f.label :内容 %>
+<%= f.text_area :body %>
+
+<%= f.submit "投稿", class: "btn btn-large btn-primary" %>
+<% end %>
+</div>

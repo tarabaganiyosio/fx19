@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @eva.user_id %>
+</p>
+
+<p>
+  <strong>Broker:</strong>
+  <%= @eva.broker_id %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @eva.body %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @eva.title %>
+</p>
+
+<%= link_to 'Edit', edit_eva_path(@eva) %> |
+<%= link_to 'Back', evas_path %>

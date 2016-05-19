@@ -1,0 +1,26 @@
+
+<h2><%= link_to 'お知らせ', notices_path %></h2>
+<ul class="notices">
+    <li>
+        <% @notices.reverse.each do |notice| %>
+    	<p>[<%= notice.category %>]　<span class="time"><%= notice.created_at.strftime ("%Y/%m/%d %H:%M:%S ") %></span></p>
+    	<p><%= link_to notice.title, notice_path(notice) %></p>
+        <% end %>
+    </li>
+</ul><!--news-->
+
+<h2><%= link_to 'FX掲示板 (・A・) ＜FXについて語りましょう', boards_path %></h2>
+<ul class="boards">
+    <% @boards.reverse.each do |board| %>
+    	<p><%= link_to board.title, board_path(board) %></p>
+    <% end %>
+</ul>
+
+<h2><%= link_to 'なんでも質問版 (・A・) ＜気軽に質問してみよう！', questions_path %></h2>
+<ul class="questions">
+    <% @questions.reverse.each do |question| %>
+    	<p><%= link_to question.title, question_path(question) %></p>
+    <% end %>
+</ul>
+
+<h2>海外FX業者の比較</h2>

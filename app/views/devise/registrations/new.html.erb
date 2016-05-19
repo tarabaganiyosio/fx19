@@ -1,0 +1,23 @@
+<h2>新規登録</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :ユーザー名 %>
+  <%= f.text_field :username, autofocus: true %></div>
+
+  <div><%= f.label :メールアドレス %>
+  <%= f.email_field :email %></div>
+
+  <% if f.object.password_required? %>
+    <div><%= f.label :パスワードの入力 %>
+      <%= f.password_field :password, autocomplete: "off" %></div>
+
+    <div><%= f.label :パスワードの確認 %>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <% end %>
+
+  <div class="btn"><%= f.submit "アカウントを作成" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Evas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Broker</th>
+      <th>Body</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @evas.each do |eva| %>
+      <tr>
+        <td><%= eva.user_id %></td>
+        <td><%= eva.broker_id %></td>
+        <td><%= eva.body %></td>
+        <td><%= eva.title %></td>
+        <td><%= link_to 'Show', eva %></td>
+        <td><%= link_to 'Edit', edit_eva_path(eva) %></td>
+        <td><%= link_to 'Destroy', eva, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Eva', new_eva_path %>
