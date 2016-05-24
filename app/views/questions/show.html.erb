@@ -3,23 +3,79 @@
 <h2><%= @question.title %></h2>
 <p><%= @question.body %></p>
 
+<% if @bas.count == 0 %>
+  <% else %>
+<h2>ベストアンサー</h2>
 <div>
-  <% @answers.each_with_index do |answer, index| %>
+  <% @bas.reverse.each do |ba| %>
     <div>
-      <strong><%= answer.user.username %></strong>
+      ベストアンサー: <%= ba.username %>
       <br />
-      <label><%= index + 1 %>.　<%= answer.user.username %> さん　[ <%= answer.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>]</label>
-      <p><%= answer.body %></p>
-      <% if user_signed_in? && answer.user == current_user %>
-        <p><%= link_to 'Delete', answer_path(answer), method: :delete %></p>
+      <p><%= ba.body %></p>
+      <% if user_signed_in? && @question.username == current_user.username %>
+        　<!--<p><%= link_to '取り消し', ba_path(ba), method: :delete %></p>-->
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+  <% @replies.first(1).each do |reply| %>
+    <div>
+      <p><%= reply.body %></p>
+      <% if user_signed_in? && reply.user == current_user %>
+        <p><%= link_to 'Delete', comment_path(comment), method: :delete %></p>
       <% end %>
     </div>
   <% end %>
   <% if user_signed_in? %>
-    <%= render 'answers/form' %>
+    <%= render 'replies/form' %>
   <% end %>
+<% end %>
+
+<h2>回答一覧 (<%= @answers.count %>件)</h2>
+<div>
+  <% if @answers.count == 0 %>
+  <p>まだ回答はありません</p>
+  <% else %>
+  <% @answers.each_with_index do |answer, index| %>
+    <div>
+      <label><%= index + 1 %>.　<%= answer.user.username %> さん　[ <%= answer.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>]</label>
+      <p><%= answer.body %></p>
+      
+      <% if user_signed_in? && answer.user == current_user %>
+        <p><%= link_to 'Delete', answer_path(answer), method: :delete %></p>
+      <% end %>
+      
+      <% if @bas.count == 0 %>
+      <% if user_signed_in? %>
+          <% if user_signed_in? && @question.username == current_user.username %>
+            <%= form_for(@ba) do |f| %>
+              <%= f.hidden_field :question_id %>
+              <%= f.hidden_field :username, value: answer.user.username %>
+              <%= f.hidden_field :body, value: answer.body %>
+              <div class="actions btn">
+              <%= f.submit :ベストアンサーに選択, { :class => "ba-btn" } %>
+            <% end %>
+              </div>
+          <% end %>
+          <% else %>
+      <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <% end %>
+  
 </div>
 
+<br><br><br>
 
-<br><br><br><br>
+<% if user_signed_in? == false %>
+  <p>⚠回答するにはログインが必要です</p>
+<% else if @question.username != current_user.username %>
+    <%= render "answers/form" %>
+  <% else %>
+    <p>質問者は回答できません</p>
+  <% end %>
+<% end %>
+
+<br><br><br>
 <p><%= link_to '質問一覧へ', questions_path %></p>

@@ -4,7 +4,7 @@
 　　<%= image_tag @broker.image.url , {:class => 'broker_img'} %>
 　<% else %>
 　　<%= image_tag 'noimage.png' %>
-　<% end %>
+<% end %>
 
 <h2>ブローカー詳細</h2>
     
@@ -174,8 +174,8 @@
         <p><%= link_to 'この投稿を削除する', eva_path(eva), method: :delete %></p>
       <% end %>
     </div>
-    
   <% end %>
+  
   <% if user_signed_in? %>
     <h2>ブローカーを評価する</h2>
     <%= render 'evas/form' %>

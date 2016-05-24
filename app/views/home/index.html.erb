@@ -24,3 +24,11 @@
 </ul>
 
 <h2>海外FX業者の比較</h2>
+
+<%= link_to '新規登録', new_fruit_path %>
+
+<ul class="questions">
+    <% @fruits.reverse.each do |fruit| %>
+    	<p><%= link_to fruit.name, fruit_path(fruit) %></p>
+    <% end %>
+</ul>

@@ -1,11 +1,15 @@
 <h2>なんでも質問版</h2>
-
+<% if user_signed_in? %>
 <%= render 'questions/form' %>
+<% else %>
+<p>⚠質問を投稿するにはログインが必要です</p>
+<% end %>
 <br><br><br>
 <h2>投稿された質問</h2>
 <ul class="question">
-    <% @questions.each do |question| %>
-        <p><span class="time"><%= question.created_at.strftime("%Y/%m/%d") %></span> <%= question.username %>さんの質問</p>
-    	<%= link_to question.title, question_path(question) , { :class => "post_title" } %>
+    <% @questions.reverse.each do |question| %>
+        <%= link_to question.title, question_path(question) , { :class => "post_title" } %>
+        <p>回答数(<%= @answers.count %>)<span class="time"><%= question.created_at.strftime("%Y/%m/%d") %></span> <%= question.username %>さんの質問</p>
+        <br><br><br>
     <% end %>
 </ul>

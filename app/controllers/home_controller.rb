@@ -7,6 +7,9 @@ class HomeController < ApplicationController
     @users = User.all
     @notices = Notice.all
     @questions = Question.all
+    @evas = Eva.all
+    @fruits = Fruit.all
+    @fruit = Fruit.new
   end
 
   def show

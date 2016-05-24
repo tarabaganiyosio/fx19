@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519044838) do
+ActiveRecord::Schema.define(version: 20160523122853) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +19,24 @@ ActiveRecord::Schema.define(version: 20160519044838) do
     t.text     "body"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "bas", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.text     "body"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "username"
+  end
+
+  create_table "bests", force: :cascade do |t|
+    t.text     "body"
+    t.string   "username"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "question_id"
+    t.string   "answer_id"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -97,6 +115,14 @@ ActiveRecord::Schema.define(version: 20160519044838) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "fruits", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.string   "image"
+    t.string   "image_cache"
+  end
+
   create_table "notices", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -121,6 +147,14 @@ ActiveRecord::Schema.define(version: 20160519044838) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "ba_id"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -141,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160519044838) do
     t.string   "image"
     t.string   "image_cache"
     t.string   "remove_image"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -5,11 +5,26 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script>
   $(function(){
     $('.board_create_btn').on('click', function(){
       $('.board_create').slideToggle(200);
     });
+  });
+  
+  $(function(){
+    $(window).load(function(){
+  		$(".col-3 input").val("");
+  		
+  		$(".input-effect input").focusout(function(){
+  			if($(this).val() != ""){
+  				$(this).addClass("has-content");
+  			}else{
+  				$(this).removeClass("has-content");
+  			}
+  		})
+	  });
   });
   </script>
 </head>

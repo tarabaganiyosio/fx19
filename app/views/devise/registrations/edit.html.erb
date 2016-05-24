@@ -1,7 +1,21 @@
 <h2>アカウント情報の編集</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= render "fruits/form" %>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put , multipart: :true }) do |f| %>
   <%= devise_error_messages! %>
+  
+  <% if current_user.image.url.present? %>
+    <%= image_tag(current_user.image.url) %>
+    <%= f.label :remove_image do %>
+      <%= f.check_box :remove_image %>
+      <%= f.file_field :image %>
+      <%= f.hidden_field :image_cache %>
+    <% end %>
+  <% end %>
+  
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
   
   <div><%= f.label :ユーザー名 %>
   <%= f.text_field :username, autofocus: true %></div>
@@ -13,10 +27,10 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div><%= f.label :パスワード %> <i>(変更する場合は入力して下さい)</i>
+  <div><%= f.label :パスワード入力 %> <i>(変更する場合は入力して下さい)</i>
     <%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :確認のためパスワードをもう一度入力して下さい %>
+  <div><%= f.label :パスワード確認 %> <i>(変更する場合は入力して下さい)</i>
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
   <div><%= f.label :現在のパスワード %>
@@ -30,4 +44,3 @@
 <h2>アカウントを削除</h2>
 
 <p><%= button_to "削除する", registration_path(resource_name), data: { confirm: "本当にアカウントを削除しますか？" }, method: :delete %></p>
-<%= link_to "戻る", :back %>

@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+    <% if user_signed_in? && @question.username == current_user.username %>
+      <%= form_for(@ba) do |f| %>
+        <%= f.hidden_field :question_id %>
+        <%= f.hidden_field :username, value: answer.user.username %>
+        <%= f.hidden_field :body, value: @answer.body %>
+        <div class="actions btn">
+          <%= f.submit :ベストアンサーに選択, {:class => 'ba-btn'} %>
+        </div>
+      <% end %>
+    <% end %>
+<% end %>

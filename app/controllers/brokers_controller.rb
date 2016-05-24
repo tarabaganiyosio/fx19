@@ -4,14 +4,17 @@ class BrokersController < ApplicationController
     @broker = Broker.friendly.find(params[:id])
     @evas = @broker.evas.includes(:user).all
     @eva  = @broker.evas.build(user_id: current_user.id) if current_user
+    @evas = Eva.all
   end
   
   def new
     @broker = Broker.new
+    @evas = Eva.all
   end
   
   def index
     @brokers = Broker.all
+    @evas = Eva.all
   end
   
   def create

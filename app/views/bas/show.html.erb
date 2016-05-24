@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ba.user_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @ba.question_id %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @ba.body %>
+</p>
+
+<%= link_to 'Edit', edit_ba_path(@ba) %> |
+<%= link_to 'Back', bas_path %>

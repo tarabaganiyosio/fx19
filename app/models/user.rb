@@ -1,7 +1,17 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :timeoutable
+  
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  
   mount_uploader :image, ImageUploader
+  
+  validates_presence_of   :image
+  validates_integrity_of  :image
+  validates_processing_of :image
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -14,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :evas
   has_many :questions
   has_many :answers
+  has_many :bas
+  has_many :replies
   
   def self.from_omniauth(auth)
     # providerとuidでUserレコードを取得する
