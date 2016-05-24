@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-
-  resources :fruits
-  resources :replies
-  get 'fruits/index'
-  get 'fruits/show'
-  get 'fruits/new'
+  
   get 'boards/index'
   get 'boards/show'
   get 'boards/new'
@@ -16,6 +11,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, path_names: { sign_in: "login", sign_out: "logout"},
     controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  resources :replies
   resources :bas
   resources :notices
   resources :answers
@@ -25,4 +21,10 @@ Rails.application.routes.draw do
   resources :brokers
   resources :users, :only => [:index, :show]
   resources :boards
+  resources :relationships, only: [:create, :destroy]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 end

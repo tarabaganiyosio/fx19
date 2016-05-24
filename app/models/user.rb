@@ -26,6 +26,15 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :bas
   has_many :replies
+  has_many :following_relationships, class_name:  "Relationship",
+                                     foreign_key: "follower_id",
+                                     dependent:   :destroy
+  has_many :following_users, through: :following_relationships, source: :followed
+  
+  has_many :follower_relationships, class_name:  "Relationship",
+                                  foreign_key: "followed_id",
+                                  dependent:   :destroy
+  has_many :follower_users, through: :follower_relationships, source: :follower
   
   def self.from_omniauth(auth)
     # providerとuidでUserレコードを取得する
@@ -58,4 +67,21 @@ class User < ActiveRecord::Base
       super
     end
   end
+  
+  #フォロー機能
+  # 他のユーザーをフォローする
+    def follow(other_user)
+        following_relationships.find_or_create_by(followed_id: other_user.id)
+    end
+    
+    # フォローしているユーザーをアンフォローする
+    def unfollow(other_user)
+        following_relationship = following_relationships.find_by(followed_id: other_user.id)
+        following_relationship.destroy if following_relationship
+    end
+    
+    # あるユーザーをフォローしているかどうか？
+    def following?(other_user)
+        following_users.include?(other_user)
+    end
 end

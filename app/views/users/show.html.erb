@@ -1,9 +1,76 @@
 <h2><%= @user.username %> さんのページ</h2>
-<label>メールアドレス</label>
-<%= @user.email %>
+<% if current_user.image? %>
+<%= image_tag @user.image.url, {:class => "user_icon_m"} %>
+<% else %>
+<%= image_tag 'imgres.png', {:class => "user_icon_m"} %>
+<% end %>
+<p class="user_profile">こんにちは、FXが大好きな30歳の高校生です！好きな食べ物はご飯とライスで、嫌いな食べ物はごはんですよですよ！
+あ、ちなみにごはんですよはご飯じゃないですよ！</p>
 
-<%= @user.image %>
+<%= render 'follow_form' if user_signed_in? %>
+<br><br>
+<h2>バッジコレクション</h2>
+<p>まだありません（笑）</p>
+<br><br>
 
-<%= image_tag @user.image.url %>
+<p>BA数: <%= @bas.count %></p>
 
-<p><%= link_to 'プロフィール変更', edit_user_registration_path %></p>
+<h2>掲示版・質問板情報</h2>
+<p class="post_title">このユーザーの掲示板</p>
+<% @boards.each do |board| %>
+  <li>・ <%= link_to board.title, board_path(board) %></li>
+<% end %>
+<br><br>
+
+<p class="post_title">このユーザーの投稿</p>
+<% @comments.each do |comment| %>
+  <li>・ <%= link_to comment.body, '#' %></li>
+<% end %>
+<br><br>
+
+<p class="post_title">このユーザーの質問</p>
+<% @questions.each do |question| %>
+  <li>・ <%= link_to question.title, '#' %></li>
+<% end %>
+<br><br>
+
+<p class="post_title">このユーザーの回答</p>
+<% @answers.each do |answer| %>
+  <li>・ <%= link_to answer.body, '#' %></li>
+<% end %>
+<br><br>
+
+<p class="post_title">フォロー (<%= @user.following_users.count %>人)</p>
+<% if @user.following_users.any? %>
+<ul class="following_users">
+    <% @user.following_users.each do |user| %>
+    <li class="following_user">
+        <% if user.image? %>
+        <%= image_tag user.image.url %>
+        <% else %>
+        <%= image_tag 'user_noimage.png' %>
+        <% end %>
+        <%= link_to user.username, user , { :class => "following_name" }  %>
+    </li>
+    <% end %>
+</ul>
+<% end %>
+
+<p class="post_title">フォロワー (<%= @user.follower_users.count %>人)</p>
+<% if @user.follower_users.any? %>
+<ul class="following_users">
+    <% @user.follower_users.each do |user| %>
+    <li class="following_user">
+        <% if user.image? %>
+        <%= image_tag user.image.url %>
+        <% else %>
+        <%= image_tag 'user_noimage.png' %>
+        <% end %>
+        <%= link_to user.username, user , { :class => "following_name" }  %>
+    </li>
+    <% end %>
+</ul>
+<% end %>
+
+
+<p><%= link_to 'プロフィール変更', edit_user_registration_path, {:class => 'user_edit'} %></p>

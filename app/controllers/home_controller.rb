@@ -8,8 +8,6 @@ class HomeController < ApplicationController
     @notices = Notice.all
     @questions = Question.all
     @evas = Eva.all
-    @fruits = Fruit.all
-    @fruit = Fruit.new
   end
 
   def show

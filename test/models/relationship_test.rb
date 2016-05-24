@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FruitTest < ActiveSupport::TestCase
+class RelationshipTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

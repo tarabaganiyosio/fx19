@@ -4,7 +4,7 @@
         <% if user_signed_in? %>
         <li><%= link_to 'FX 掲示板', boards_path %></li><li><%= link_to 'なんでも質問版', questions_path %></li><li><%= link_to 'ブローカーを見る', brokers_path %></li><li><%= link_to 'ブローカーの追加', new_broker_path %></li><li><%= link_to 'ユーザーを探す', users_index_path %></li><li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
         <% else %>
-        <li><%= link_to 'サインイン', new_user_registration_path %></li><li><%= link_to "ログイン", new_user_session_path %></li><li><span class="twitter_login"><%= link_to image_tag("twitter_login.png"), user_omniauth_authorize_path(:twitter) %></span></li><li><span class="twitter_login"><%= link_to image_tag("facebook_login.png"), user_omniauth_authorize_path(:twitter) %></span></li><li><span class="twitter_login"><%= link_to image_tag("google_login.png"), user_omniauth_authorize_path(:twitter) %></span></li>
+        <li><%= link_to '新規登録', new_user_registration_path %></li><li><%= link_to "ログイン", new_user_session_path %></li><li><span class="twitter_login"><%= link_to image_tag("twitter_login.png"), user_omniauth_authorize_path(:twitter) %></span></li><li><span class="twitter_login"><%= link_to image_tag("facebook_login.png"), user_omniauth_authorize_path(:twitter) %></span></li><li><span class="twitter_login"><%= link_to image_tag("google_login.png"), user_omniauth_authorize_path(:twitter) %></span></li>
         <% end %>
     </nav>
 </div><!--wrapper-header-->
