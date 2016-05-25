@@ -13,8 +13,8 @@ class QuestionsController < ApplicationController
     @answer   = @question.answers.build(user_id: current_user.id) if current_user
     @bas      = @question.bas.includes(:user).all
     @ba       = @question.bas.build(user_id: current_user.id) if current_user
-    @replies  = @ba.replies.includes(:user).all
-    @reply    = @ba.replies.build(user_id: current_user.id) if current_user
+    @replies  = @question.replies.includes(:user).all
+    @reply    = @question.replies.build(user_id: current_user.id) if current_user
   end
 
   def new
@@ -26,6 +26,30 @@ class QuestionsController < ApplicationController
         redirect_to question_url(@question)
     else
         render "new"
+    end
+  end
+  
+  def edit
+    @question = Question.find(params[:id])
+  end
+  
+  def update
+    @question = Question.new
+    @question = Question.find(params[:id])
+    if @question.update_attributes(params_question)
+      redirect_to @question
+    else
+      render 'edit'
+    end
+  end
+  
+  # DELETE /questions/1
+  # DELETE /questions/1.json
+  def destroy
+    @question.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: '質問を削除しました' }
+      format.json { head :no_content }
     end
   end
 

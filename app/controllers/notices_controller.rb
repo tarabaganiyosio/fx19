@@ -56,7 +56,7 @@ class NoticesController < ApplicationController
   def destroy
     @notice.destroy
     respond_to do |format|
-      format.html { redirect_to notices_url, notice: 'Notice was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Notice was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

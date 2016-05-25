@@ -1,5 +1,6 @@
 <h2>なんでも質問版</h2>
 <% if user_signed_in? %>
+<h3 class="board_create_btn">質問を投稿する</h3>
 <%= render 'questions/form' %>
 <% else %>
 <p>⚠質問を投稿するにはログインが必要です</p>

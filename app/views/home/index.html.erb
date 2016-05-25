@@ -1,13 +1,15 @@
+<h2>FX-NEWS</h2>
+<div id="feed" class="feed_box"></div>
 
-<h2><%= link_to 'お知らせ', notices_path %></h2>
+<h2><%= link_to '運営からのお知らせ', notices_path %></h2>
 <ul class="notices">
     <li>
-        <% @notices.reverse.each do |notice| %>
+        <% @notices.reverse.first(3).each do |notice| %>
     	<p>[<%= notice.category %>]　<span class="time"><%= notice.created_at.strftime ("%Y/%m/%d %H:%M:%S ") %></span></p>
     	<p><%= link_to notice.title, notice_path(notice) %></p>
         <% end %>
     </li>
-</ul><!--news-->
+</ul><!--notices-->
 
 <h2><%= link_to 'FX掲示板 (・A・) ＜FXについて語りましょう', boards_path %></h2>
 <ul class="boards">
@@ -24,4 +26,8 @@
 </ul>
 
 <h2>海外FX業者の比較</h2>
+<h2>ユーザーランキング</h2>
+<% @bas.each do |ba| %>
+<p><%= ba.created_at.strftime ("%Y/%m/%d %H:%M:%S ") %>に"<%= ba.username %>"さんがBAに選択されました</p>
+<% end %>
 

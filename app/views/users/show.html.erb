@@ -16,25 +16,25 @@
 <h2>掲示版・質問板情報</h2>
 <p class="post_title">このユーザーの掲示板</p>
 <% @boards.each do |board| %>
-  <li>・ <%= link_to board.title, board_path(board) %></li>
+  <li>・ <%= link_to board.title.truncate(40) , board_path(board) %></li>
 <% end %>
 <br><br>
 
 <p class="post_title">このユーザーの投稿</p>
 <% @comments.each do |comment| %>
-  <li>・ <%= link_to comment.body, '#' %></li>
+  <li>・ <%= link_to comment.body.truncate(40) , '#' %></li>
 <% end %>
 <br><br>
 
 <p class="post_title">このユーザーの質問</p>
 <% @questions.each do |question| %>
-  <li>・ <%= link_to question.title, '#' %></li>
+  <li>・ <%= link_to question.title.truncate(40) , '#' %></li>
 <% end %>
 <br><br>
 
 <p class="post_title">このユーザーの回答</p>
 <% @answers.each do |answer| %>
-  <li>・ <%= link_to answer.body, '#' %></li>
+  <li>・ <%= link_to answer.body.truncate(40) , '#' %></li>
 <% end %>
 <br><br>
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'boards/index'
   get 'boards/show'
   get 'boards/new'

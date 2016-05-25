@@ -1,34 +1,38 @@
-<%= link_to @question.username , '#' %>
+投稿者: <%= link_to @question.username , '#' %>さん
 <%= @question.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>
 <h2><%= @question.title %></h2>
 <p><%= @question.body %></p>
-
-<% if @bas.count == 0 %>
-  <% else %>
-<h2>ベストアンサー</h2>
-<div>
-  <% @bas.reverse.each do |ba| %>
-    <div>
-      ベストアンサー: <%= ba.username %>
-      <br />
-      <p><%= ba.body %></p>
-      <% if user_signed_in? && @question.username == current_user.username %>
-        　<!--<p><%= link_to '取り消し', ba_path(ba), method: :delete %></p>-->
-      <% end %>
-    </div>
-  <% end %>
+<% if user_signed_in? && @question.username == current_user.username %>
+<%= link_to '編集', edit_question_path %>
+<% end %>
+<% if @bas.count != 0 %>
+  <h2>ベストアンサー</h2>
+  <div>
+<% @bas.reverse.each do |ba| %>
+  <div>
+  ベストアンサー: <%= ba.username %>
+  <br />
+  <p><%= ba.body %></p>
+<% if user_signed_in? && @question.username == current_user.username %>
+  　<!--<p><%= link_to '取り消し', ba_path(ba), method: :delete %></p>-->
+<% end %>
   </div>
-  
-  <% @replies.first(1).each do |reply| %>
-    <div>
-      <p><%= reply.body %></p>
-      <% if user_signed_in? && reply.user == current_user %>
-        <p><%= link_to '削除', comment_path(comment), method: :delete %></p>
-      <% end %>
-    </div>
+<% end %>
+  </div>
+<% end %>
+
+<% if @replies.count == 0 %>
+  <% else %>
+    <p>-------------------------質問者からのコメント-------------------------</p>
+  <% @replies.each do |reply| %>
+    <p>▷ <%= reply.body %></p>
+  <% if user_signed_in? && reply.user == current_user %>
+    <p>-------------------------------------<%= link_to '削除', reply_path(reply), method: :delete %>-------------------------------------</p>
   <% end %>
-  
-  
+  <% end %>
+<% end %>
+
+<% if @replies.count == 0 && @bas.count != 0 %>
   <% if user_signed_in? && @question.username == current_user.username %>
     <%= render 'replies/form' %>
   <% end %>
@@ -37,7 +41,7 @@
 <h2>回答一覧 (<%= @answers.count %>件)</h2>
 <div>
   <% if @answers.count == 0 %>
-  <p>まだ回答はありません</p>
+    <p>まだ回答はありません</p>
   <% else %>
   <% @answers.each_with_index do |answer, index| %>
     <div>
@@ -45,7 +49,7 @@
       <p><%= answer.body %></p>
       
       <% if user_signed_in? && answer.user == current_user %>
-        <p><%= link_to 'Delete', answer_path(answer), method: :delete %></p>
+        <p><%= link_to '削除', answer_path(answer), method: :delete %></p>
       <% end %>
       
       <% if @bas.count == 0 %>
@@ -70,7 +74,7 @@
 </div>
 
 <br><br><br>
-
+<% if @bas.count == 0 %>
 <% if user_signed_in? == false %>
   <p>⚠回答するにはログインが必要です</p>
 <% else if @question.username != current_user.username %>
@@ -79,6 +83,10 @@
     <p>質問者は回答できません</p>
   <% end %>
 <% end %>
+<% else %>
+<p>回答の募集は終了しましたm(_ _)m</p>
+<% end %>
 
-<br><br><br>
+<br><br>
+<br>
 <p><%= link_to '質問一覧へ', questions_path %></p>

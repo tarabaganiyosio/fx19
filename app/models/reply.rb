@@ -1,4 +1,4 @@
 class Reply < ActiveRecord::Base
     belongs_to :user
-    belongs_to :ba
+    belongs_to :question
 end
