@@ -1,26 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Bas</h1>
+<h2>BA数によるユーザーランキング</h2>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Question</th>
-      <th>Body</th>
-      <th colspan="3"></th>
+      <th>ユーザーネーム</th>
+      <th>質問板ID</th>
     </tr>
   </thead>
 
   <tbody>
     <% @bas.each do |ba| %>
       <tr>
-        <td><%= ba.user_id %></td>
+        <td><p><%= ba.username %></p></td>
         <td><%= ba.question_id %></td>
-        <td><%= ba.body %></td>
-        <td><%= link_to 'Show', ba %></td>
-        <td><%= link_to 'Edit', edit_ba_path(ba) %></td>
-        <td><%= link_to 'Destroy', ba, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +20,3 @@
 
 <br>
 
-<%= link_to 'New Ba', new_ba_path %>

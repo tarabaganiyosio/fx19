@@ -56,7 +56,7 @@ class BasController < ApplicationController
   def destroy
     @ba.destroy
     respond_to do |format|
-      format.html { redirect_to bas_url, notice: 'Ba was successfully destroyed.' }
+      format.html { redirect_to bas_url}
       format.json { head :no_content }
     end
   end

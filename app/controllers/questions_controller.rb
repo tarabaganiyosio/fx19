@@ -9,12 +9,12 @@ class QuestionsController < ApplicationController
   
   def show
     @question = Question.find(params[:id])
-    @answers = @question.answers.includes(:user).all
-    @answer  = @question.answers.build(user_id: current_user.id) if current_user
-    @bas = @question.bas.includes(:user).all
-    @ba  = @question.bas.build(user_id: current_user.id) if current_user
-    @replies = @ba.replies.includes(:user).all
-    @reply  = @ba.replies.build(user_id: current_user.id) if current_user
+    @answers  = @question.answers.includes(:user).all
+    @answer   = @question.answers.build(user_id: current_user.id) if current_user
+    @bas      = @question.bas.includes(:user).all
+    @ba       = @question.bas.build(user_id: current_user.id) if current_user
+    @replies  = @ba.replies.includes(:user).all
+    @reply    = @ba.replies.build(user_id: current_user.id) if current_user
   end
 
   def new

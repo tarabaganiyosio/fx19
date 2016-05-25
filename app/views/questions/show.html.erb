@@ -18,15 +18,18 @@
     </div>
   <% end %>
   </div>
+  
   <% @replies.first(1).each do |reply| %>
     <div>
       <p><%= reply.body %></p>
       <% if user_signed_in? && reply.user == current_user %>
-        <p><%= link_to 'Delete', comment_path(comment), method: :delete %></p>
+        <p><%= link_to '削除', comment_path(comment), method: :delete %></p>
       <% end %>
     </div>
   <% end %>
-  <% if user_signed_in? %>
+  
+  
+  <% if user_signed_in? && @question.username == current_user.username %>
     <%= render 'replies/form' %>
   <% end %>
 <% end %>
