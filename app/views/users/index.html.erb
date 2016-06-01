@@ -2,7 +2,13 @@
 <ul class="brokers">
     <% @users.reverse.each do |user| %>
         <li>
-            <label><%= link_to user.username, user %></label>
+            <p><%= link_to user.username, user %>:<%= link_to user.comments_count, user %></p>
         </li>
+        <% @bas.each do |ba| %>
+            <% if ba.username == user.username %>
+            <% end %>
+        <% end %>
+        <br><br><br>
     <% end %>
 </ul>
+<br><br>

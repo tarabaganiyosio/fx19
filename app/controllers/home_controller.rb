@@ -12,5 +12,7 @@ class HomeController < ApplicationController
   end
 
   def show
+    @bas = Ba.all
   end
+  
 end

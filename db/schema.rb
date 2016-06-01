@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525083020) do
+ActiveRecord::Schema.define(version: 20160601022747) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 20160525083020) do
     t.integer  "user_id"
     t.integer  "question_id"
     t.text     "body"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "username"
+    t.integer  "bas_count",   default: 0
   end
 
   create_table "bests", force: :cascade do |t|
@@ -143,8 +144,10 @@ ActiveRecord::Schema.define(version: 20160525083020) do
     t.string   "title"
     t.text     "body"
     t.string   "username"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "comments_count", default: 0
+    t.integer  "answers_count",  default: 0
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -189,6 +192,8 @@ ActiveRecord::Schema.define(version: 20160525083020) do
     t.string   "remove_image"
     t.string   "avatar"
     t.string   "ba_rank"
+    t.integer  "count",                  default: 0
+    t.integer  "comments_count",         default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

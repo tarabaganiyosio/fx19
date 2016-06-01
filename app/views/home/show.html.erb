@@ -1,2 +1,5 @@
-<h1>Home#show</h1>
-<p>Find me in app/views/home/show.html.erb</p>
+<h2>こちらは法務省のページです</h2>
+<p class="post_title">激アツの質問版　TOP10</p>
+<% Question.order(answers_count: :desc).limit(10).each_with_index do |q, index| %>
+<p class="side_title"><%= index + 1 %>位：[<%= q.answers_count %>]<%= link_to q.title , q %><br></p>
+<% end %>

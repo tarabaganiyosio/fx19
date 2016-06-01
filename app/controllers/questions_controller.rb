@@ -3,8 +3,6 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all
     @question = Question.new
-    @bas = @question.bas.includes(:user).all
-    @answers = @question.answers.includes(:user).all
   end
   
   def show
@@ -16,10 +14,7 @@ class QuestionsController < ApplicationController
     @replies  = @question.replies.includes(:user).all
     @reply    = @question.replies.build(user_id: current_user.id) if current_user
   end
-
-  def new
-  end
-
+  
   def create
     @question = Question.new(params_question)
     if @question.save
@@ -27,7 +22,7 @@ class QuestionsController < ApplicationController
     else
         render "new"
     end
-  end
+  end                                                                                                                        
   
   def edit
     @question = Question.find(params[:id])
@@ -61,6 +56,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def params_question
-      params.require(:question).permit(:title, :body, :username)
+      params.require(:question).permit(:title, :body, :username, :comments_count, :answers_count)
     end
 end

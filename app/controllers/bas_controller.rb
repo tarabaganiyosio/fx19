@@ -25,7 +25,6 @@ class BasController < ApplicationController
   # POST /bas.json
   def create
     @ba = Ba.new(ba_params)
-
     respond_to do |format|
       if @ba.save
         format.html { redirect_to :back, notice: 'ベストアンサーを選択しました' }
@@ -69,6 +68,6 @@ class BasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ba_params
-      params.require(:ba).permit(:user_id, :question_id, :body, :username)
+      params.require(:ba).permit(:user_id, :question_id, :body, :username, :bas_count)
     end
 end

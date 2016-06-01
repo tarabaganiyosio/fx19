@@ -1,10 +1,12 @@
 投稿者: <%= link_to @question.username , '#' %>さん
 <%= @question.created_at.strftime("%Y/%m/%d %H:%M:%S ") %>
-<h2><%= @question.title %></h2>
+<h2><%= @question.title %>(answers_count:<%= @question.answers_count %>)</h2>
 <p><%= @question.body %></p>
 <% if user_signed_in? && @question.username == current_user.username %>
 <%= link_to '編集', edit_question_path %>
 <% end %>
+
+<!--BAの表示（@basのモデルがない場合は非表示）-->
 <% if @bas.count != 0 %>
   <h2>ベストアンサー</h2>
   <div>
@@ -21,8 +23,8 @@
   </div>
 <% end %>
 
-<% if @replies.count == 0 %>
-  <% else %>
+<!--BAに対するコメント表示（@repliesモデルがない場合は非表示）-->
+<% if @replies.count != 0 %>
     <p>-------------------------質問者からのコメント-------------------------</p>
   <% @replies.each do |reply| %>
     <p>▷ <%= reply.body %></p>
@@ -32,11 +34,13 @@
   <% end %>
 <% end %>
 
+<!--BAに対するコメント入力（@basモデルが作成されれば表示でコメントが入力されれば非表示）-->
 <% if @replies.count == 0 && @bas.count != 0 %>
   <% if user_signed_in? && @question.username == current_user.username %>
     <%= render 'replies/form' %>
   <% end %>
 <% end %>
+
 
 <h2>回答一覧 (<%= @answers.count %>件)</h2>
 <div>

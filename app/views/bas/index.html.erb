@@ -3,8 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>ユーザーネーム</th>
+      <th>BAされたユーザー</th>
+      <th>内容</th>
       <th>質問板ID</th>
+      <th>bas_count</th>
     </tr>
   </thead>
 
@@ -12,7 +14,9 @@
     <% @bas.each do |ba| %>
       <tr>
         <td><p><%= ba.username %></p></td>
+        <td><p><%= ba.body %></p></td>
         <td><%= ba.question_id %></td>
+        <td><%= ba.bas_count %></td>
       </tr>
     <% end %>
   </tbody>

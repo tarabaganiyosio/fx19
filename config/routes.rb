@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'boards/new'
   get 'users/index'
   get 'users/show'
+  get 'home/show'
   
   devise_scope :user do
     root :to => 'home#index'

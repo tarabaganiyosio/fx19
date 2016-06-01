@@ -25,6 +25,7 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    # @rank = Rank.new(rank_params)
 
     respond_to do |format|
       if @answer.save
@@ -56,7 +57,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to :back, notice: '回答を削除しました' }
       format.json { head :no_content }
     end
   end

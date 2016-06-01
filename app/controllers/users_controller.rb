@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    @bas = Ba.all
   end
 
   def show
@@ -32,6 +33,6 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:email, :password,:password_confirmation, :profile, :image, :image_cache, :remove_image, :provider, :uid, :username, :avatar, :avatar_cache, :remove_avatar, :ba_rank )
+    params.require(:user).permit(:email, :password,:password_confirmation, :profile, :image, :image_cache, :remove_image, :provider, :uid, :username, :avatar, :avatar_cache, :remove_avatar, :ba_rank, :rank, :comments_count )
   end
 end

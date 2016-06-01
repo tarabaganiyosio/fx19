@@ -28,6 +28,7 @@
 	  });
   });
   </script>
+  
   <script>
   google.load("feeds", "1");
   function initialize() {
@@ -76,15 +77,17 @@
 
 <body>
     <div class="all">
-      <%= render "layouts/header" %>
+      
         <div class="top">
         </div><!--top-->
+        <%= render "layouts/header" %>
         <div class="container">
             <%= render "layouts/leftside" %><div class="content">
                 <p class="notice"><%= notice %></p>
                 <%= yield %>
             </div><%= render "layouts/rightside" %>
             <%= render "layouts/footer" %>
+
         </div><!--container-->
     </div><!--all-->
 </body>

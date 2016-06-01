@@ -8,9 +8,15 @@
 <br><br><br>
 <h2>投稿された質問</h2>
 <ul class="question">
+    
     <% @questions.reverse.each do |question| %>
         <%= link_to question.title, question_path(question) , { :class => "post_title" } %>
-        <p>回答数(<%= @answers.count %>)<span class="time"><%= question.created_at.strftime("%Y/%m/%d") %></span> <%= question.username %>さんの質問</p>
+        <p><span class="time"><%= question.created_at.strftime("%Y/%m/%d") %></span> <%= question.username %>さんの質問　回答数: <%= question.answers.count %>件</p>
+        <% if question.bas.count == 1 %>
+        <p class="green">✔ 解決済み</p>
+        <% else %>
+        <p class="red">✏ 回答募集中</p>
+        <% end %>
         <br><br><br>
     <% end %>
 </ul>
